@@ -52,16 +52,21 @@ describe('Demo', () => {
             wallet.id = 'c51c80c2-66a1-442a-91e2-4f55b4256a72';
             wallet.name = 'anxing123';
 
-            wallet.save()
-                .then(
+            Rx.Observable.fromPromise(wallet.save())
+                .flatMap(
                     res => {
-                        done();
+                        return Wallet.findOne({});
                     }
                 )
-                .catch(
-                    err => {
-                        done(err);
-                    }
+                .subscribe(
+                    res => {
+                        assert.isTrue(!!res);
+                        assert.deepStrictEqual(res.name, 'anxing123');
+                        setTimeout(() => {
+                            done();
+                        }, 30000);
+                    },
+                    err => done(err)
                 )
         })
     });

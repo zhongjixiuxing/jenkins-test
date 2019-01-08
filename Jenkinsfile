@@ -13,7 +13,7 @@ pipeline {
                 等待mongo 服务正常启动运行
             */
             docker.image('mongo').inside("--link ${c.id}:db") {
-               sh 'while ! mongo --eval "printjson(db.serverStatus()) --host db"; do sleep 1; done'
+               sh 'while ! mongo --host db --eval "printjson(db.serverStatus())"; do sleep 1; done'
             }
 
             docker.image('node:8.15').inside("--link ${c.id}:db") {

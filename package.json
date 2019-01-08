@@ -1,0 +1,28 @@
+{
+  "name": "jenkins-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha test --exit --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhongjixiuxing/jenkins-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhongjixiuxing/jenkins-test/issues"
+  },
+  "homepage": "https://github.com/zhongjixiuxing/jenkins-test#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "lodash": "^4.17.11",
+    "mocha": "^5.2.0",
+    "mongoose": "^5.4.2",
+    "rxjs": "^6.3.3",
+    "rxjs-compat": "^6.3.3",
+    "sinon": "^7.2.2"
+  }
+}

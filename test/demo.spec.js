@@ -62,9 +62,7 @@ describe('Demo', () => {
                     res => {
                         assert.isTrue(!!res);
                         assert.deepStrictEqual(res.name, 'anxing123');
-                        setTimeout(() => {
-                            done();
-                        }, 30000);
+                        done();
                     },
                     err => done(err)
                 )

@@ -16,7 +16,10 @@ pipeline {
       }
       steps {
         script {
-          def userInput = input(id: 'userInput', message: 'GOOOOOOOO', parameters: [[$class: 'TextParameterDefinition', defaultValue: 'yser', description: 'input you name', name: 'username']])
+          def userInput = input(id: 'userInput', message: 'GOOOOOOOO', parameters: [
+            [$class: 'TextParameterDefinition', defaultValue: 'yser', description: 'input you name', name: 'username'],
+            [$class: 'TextParameterDefinition', defaultValue: 'helo', description: 'input you age', name: 'userage']
+          ])
 
           echo ("userInput : " + userInput)
         }

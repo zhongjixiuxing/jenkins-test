@@ -22,6 +22,7 @@ pipeline {
           ])
 
           echo ("userInput : " + userInput)
+          echo ("username : " + userInput.username)
         }
 
       }

@@ -2,20 +2,33 @@ pipeline {
   agent any
   stages {
     stage('Build Image') {
-      input {
-        message 'Build Image and publish'
-        id 'building'
-        parameters {
-          choice(name: 'publishName', choices: ['dev(localhost)', 'sandbox', 'production'], description: 'What do you want to publish env?')
-          string(name: 'buildImageName', defaultValue: 'btc-gateway:latest', description: 'build/publish docker image name')
-          string(name: 'sshHost', defaultValue: '192.168.1.104', description: 'SSH host of deployment server')
-          string(name: 'sshUser', defaultValue: 'root', description: 'SSH user name')
-          string(name: 'sshPassword', defaultValue: '', description: 'SSH password')
-          text(name: 'sshCommands', defaultValue: 'docker run -id --name btc-gateway btc-gateway:latest', description: 'ssh exec commands')
-        }
-      }
       steps {
         script {
+          def uInput = input {
+            message 'Build Image and publish'
+            id 'building'
+            parameters {
+              choice(name: 'publishName', choices: ['dev(localhost)', 'sandbox', 'production'], description: 'What do you want to publish env?')
+              string(name: 'buildImageName', defaultValue: 'btc-gateway:latest', description: 'build/publish docker image name')
+              string(name: 'sshHost', defaultValue: '192.168.1.104', description: 'SSH host of deployment server')
+              string(name: 'sshUser', defaultValue: 'root', description: 'SSH user name')
+              string(name: 'sshPassword', defaultValue: '', description: 'SSH password')
+              text(name: 'sshCommands', defaultValue: 'docker run -id --name btc-gateway btc-gateway:latest', description: 'ssh exec commands')
+            }
+          }
+
+          echo ('uInput -------------------- : ' + uInput)
+
+/*
+          def remote = [:]
+          remote.name = "${sshHost}"
+          remote.host = "${sshHost}"
+          remote.user = "${sshUser}"
+          remote.password = "${sshPassword}"
+          remote.allowAnyHosts = true
+
+          sshCommand remote:remote, command: "${sshCommands}"
+
           def userInput = input(id: 'userInput', message: 'GOOOOOOOO', parameters: [
             [$class: 'TextParameterDefinition', defaultValue: 'yser', description: 'input you name', name: 'username'],
             [$class: 'TextParameterDefinition', defaultValue: 'helo', description: 'input you age', name: 'userage']
@@ -23,6 +36,7 @@ pipeline {
 
           echo ("userInput : " + userInput)
           echo ("username : " + userInput.username)
+          */
         }
 
       }

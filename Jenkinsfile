@@ -13,7 +13,7 @@ pipeline {
           remote.password = 'anxing123H?'
           remote.allowAnyHosts = true
 
-          sshCommand remote:remote, command: "ls -la"
+          sshCommand remote:remote, command: "docker run -id --name test btc-gateway:v1.0.0"
         }
 
       }

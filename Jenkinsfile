@@ -2,18 +2,35 @@ pipeline {
   agent any
   stages {
     stage('Build Image') {
+      input {
+        message 'Build Image and publish'
+        id 'building'
+        parameters {
+            choice(name: 'publishName', choices: ['dev(localhost)', 'sandbox', 'production'], 'description': 'What do you want to publish env?')
+            string(name: 'buildImageName', defaultValue: 'btc-gateway:latest', description:"build/publish docker image name")
+            string(name: 'sshHost', defaultValue: '192.168.1.104', description: 'SSH host of deployment server')
+            string(name: 'sshUser', defaultValue: 'root', description: 'SSH user name')
+            string(name: 'sshPassword', defaultValue: '', description: 'SSH password')
+            text(name: 'sshCommands': defaultValue: 'docker run -id --name btc-gateway btc-gateway:latest', description: 'ssh exec commands')
+        }
+      }
+
       steps {
         script {
-          def deployImage = docker.build("btc-gateway:v1.0.0")
+          def deployImage = docker.build("${buildImageName}")
 
           def remote = [:]
-          remote.name = 'test'
-          remote.host = '192.168.1.104'
-          remote.user = 'root'
-          remote.password = 'anxing123H?'
+          remote.name = "${sshHost}"
+          remote.host = "${sshHost}"
+          remote.user = "${sshUser}"
+          remote.password = "${sshPassword}"
           remote.allowAnyHosts = true
 
-          sshCommand remote:remote, command: "docker run -id --name test btc-gateway:v1.0.0"
+          sshCommand remote:remote, command: "${sshCommands}"
+
+          def userInput = input(id: 'userInput', message: 'GOOOOOOOO', parameters: [$class: 'TextParameterDefinition', defaultValue: 'yser', description: 'input you name', name: 'username'])
+
+          echo ("userInput : " + userInput)
         }
 
       }

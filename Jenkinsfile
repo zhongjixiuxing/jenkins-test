@@ -11,7 +11,7 @@ pipeline {
             string(name: 'sshHost', defaultValue: '192.168.1.104', description: 'SSH host of deployment server')
             string(name: 'sshUser', defaultValue: 'root', description: 'SSH user name')
             string(name: 'sshPassword', defaultValue: '', description: 'SSH password')
-            text(name: 'sshCommands': defaultValue: 'docker run -id --name btc-gateway btc-gateway:latest', description: 'ssh exec commands')
+            text(name: 'sshCommands', defaultValue: 'docker run -id --name btc-gateway btc-gateway:latest', description: 'ssh exec commands')
         }
       }
 

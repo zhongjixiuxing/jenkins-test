@@ -5,6 +5,13 @@ pipeline {
       MONGO_URI = 'mongodb://db/btc-gateway'
   }
   stages {
+    stage('Build Image') {
+      steps {
+        script {
+
+        }
+      }
+    }
     stage('Run tests') {
       steps {
         script {

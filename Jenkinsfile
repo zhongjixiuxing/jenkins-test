@@ -8,7 +8,7 @@ pipeline {
     stage('Build Image') {
       steps {
         script {
-
+            def deployImage = docker.build("btc-gateway:v1.0.0")
         }
       }
     }

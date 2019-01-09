@@ -11,7 +11,7 @@ pipeline {
           remote.host = '192.168.1.104'
           remote.user = 'root'
           remote.password = 'anxing123H?'
-          remote.allowAnyHost = true
+          remote.allowAnyHosts = true
 
           sshCommand remote:remote, command: "ls -la"
         }
